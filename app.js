@@ -40,24 +40,30 @@ const html = {
     `,
     bodyHeader: `
         <body>
-            <h1>Welcome to Kenziegram!</h1>
+            <div id="titleBox">
+                <h1 id="title">Welcome to Kenziegram!</h1>
+            </div>
     `,
     form: `
-        <form action="http://localhost:3000/uploads" method="post" enctype="multipart/form-data">
-            <div>
-            <label for="file">Choose a File</label>
-            <!-- <input type="file" id="file" name="myFile"> -->
-            <input type="file" id="file" name="myFile">
-            
-            <!-- <input type="file" name="file" id="file" accept="image/*" multiple> -->
-            </div>
-            <div>
-            <button>Send the file</button>
-            </div>
-        </form>
+            <form action="http://localhost:3000/uploads" method="post" enctype="multipart/form-data">
+                <div>
+                <label for="file">Choose a File</label>
+                <!-- <input type="file" id="file" name="myFile"> -->
+                <input type="file" id="file" name="myFile">
+                
+                <!-- <input type="file" name="file" id="file" accept="image/*" multiple> -->
+                </div>
+                <div>
+                <button>Send the file</button>
+                </div>
+            </form>
+            <div id="gallery">
+    
     `,
     foot: `
-        <script src="./index.js"></script>
+           
+            </div>
+            <script src="./index.js"></script>
         </body>
         </html>
     `,
@@ -77,12 +83,12 @@ const html2 = {
     `,
     bodyHeader: `
         <body>
-            <h1>You uploaded an image!</h1>
+            <h1>You uploaded this image!</h1>
           
     `,
     body: `
         
-        <div>
+        <div id="confirmPage">
             <a href="/">Return</a>
         </div>
     `,
@@ -134,7 +140,7 @@ app.post('/uploads', upload.single('myFile'), function (req, res, next) {
     // creates a variable 'returnButton' that contains html code for a return button. 
     let returnButton = '<a href="/">Return</a>';
     // creates a variable 'newImage' that contains html code & the posted image (name).
-    let newImage = `<img src="${req.file.filename}">`;
+    let newImage = `<img src="${req.file.filename}"  id="newImage">`;
     // req.file is the `myFile` file
     // req.body will hold the text fields, if there are any
 
@@ -152,8 +158,9 @@ app.post('/uploads', upload.single('myFile'), function (req, res, next) {
             html2.bodyHeader + 
         // adds a return button to the variable...
             returnButton + 
+
             // redundant... adds a duplicate return button.
-            html2.body +
+            // html2.body +
 
         // adds the newImage (name) to the variable...
             newImage + 
